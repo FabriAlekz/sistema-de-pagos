@@ -1,0 +1,80 @@
+<app-navbar />
+<section class="contacto" id="formulario-contacto">
+    <div class="wrap grid">
+        <div class="info">
+            <h2>Escríbenos</h2>
+            <p>
+                Cuéntanos qué necesitas y te respondemos por WhatsApp. Al enviar, se abrirá el chat
+                con tu mensaje ya escrito.
+            </p>
+            <ul class="info__list">
+                <li><strong>Ventas</strong><span>923 780 483 · 923 780 920</span></li>
+                <li><strong>Atención al cliente</strong><span>947 295 946</span></li>
+                <li><strong>Horario</strong><span>Lun a vie 9:00 a 17:00 · Sáb 8:00 a 14:00</span></li>
+            </ul>
+        </div>
+
+        <form class="form" [formGroup]="form" (ngSubmit)="enviar()" novalidate>
+            <fieldset class="field">
+                <legend>¿Con quién quieres hablar?</legend>
+                <div class="radios">
+                    @for (a of areas; track a.id) {
+                    <label class="radio">
+                        <input type="radio" formControlName="area" [value]="a.id" />
+                        <span>{{ a.label }}</span>
+                    </label>
+                    }
+                </div>
+            </fieldset>
+
+            <div class="row">
+                <div class="field">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" type="text" formControlName="nombre" autocomplete="name"
+                        [attr.aria-invalid]="campoInvalido('nombre')" />
+                    @if (campoInvalido('nombre')) {
+                    <small class="error">Escribe tu nombre.</small>
+                    }
+                </div>
+
+                <div class="field">
+                    <label for="telefono">Celular</label>
+                    <input id="telefono" type="tel" inputmode="numeric" maxlength="9" placeholder="9XXXXXXXX"
+                        formControlName="telefono" autocomplete="tel-national"
+                        [attr.aria-invalid]="campoInvalido('telefono')" />
+                    @if (campoInvalido('telefono')) {
+                    <small class="error">Ingresa 9 dígitos, empezando con 9.</small>
+                    }
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field">
+                    <label for="ciudad">Ciudad <span class="opt">(opcional)</span></label>
+                    <input id="ciudad" type="text" formControlName="ciudad" autocomplete="address-level2" />
+                </div>
+
+                <div class="field">
+                    <label for="interes">Me interesa</label>
+                    <select id="interes" formControlName="interes" [attr.aria-invalid]="campoInvalido('interes')">
+                        <option value="" disabled>Elige una opción</option>
+                        @for (i of intereses; track i) {
+                        <option [value]="i">{{ i }}</option>
+                        }
+                    </select>
+                    @if (campoInvalido('interes')) {
+                    <small class="error">Elige una opción.</small>
+                    }
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="mensaje">Mensaje <span class="opt">(opcional)</span></label>
+                <textarea id="mensaje" rows="4" maxlength="500" formControlName="mensaje"
+                    placeholder="Ej: Quiero cotizar 2 cajas de base soft y conos para mi heladería."></textarea>
+            </div>
+
+            <button type="submit" class="btn">Enviar por WhatsApp</button>
+        </form>
+    </div>
+</section>

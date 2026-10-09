@@ -1,0 +1,251 @@
+:host {
+    --navy: #012f50;
+    --navy-deep: #01243d;
+    --sand: #e8cdb0;
+    --sand-soft: #f6ebdf;
+    --red: #d4151b;
+    display: block;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--navy);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.productos {
+    padding: clamp(3rem, 7vw, 5rem) 0;
+    background: #fffdf9;
+}
+
+.wrap {
+    width: min(1120px, 100% - 2.5rem);
+    margin-inline: auto;
+}
+
+h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 900;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin: 0 0 0.5rem;
+}
+
+.intro {
+    margin: 0 0 1.75rem;
+    opacity: 0.85;
+}
+
+.submission-notice {
+    margin: 0 0 1.5rem;
+    padding: 1rem 1.25rem;
+    border-left: 4px solid #287a49;
+    border-radius: 8px;
+    background: #e3f3e8;
+    color: #174b30;
+    line-height: 1.5;
+}
+
+:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 3px;
+}
+
+/* Toolbar */
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 1.75rem;
+}
+
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tab {
+    border: 2px solid var(--navy);
+    background: transparent;
+    color: var(--navy);
+    font: inherit;
+    font-weight: 600;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.tab--active {
+    background: var(--navy);
+    color: var(--sand);
+}
+
+.search {
+    font: inherit;
+    padding: 0.55rem 1rem;
+    border: 2px solid var(--sand);
+    border-radius: 999px;
+    min-width: 220px;
+    color: var(--navy);
+    background: #fff;
+}
+
+/* Grid */
+.grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--sand-soft);
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.card--agotado {
+    opacity: 0.7;
+}
+
+.card__media {
+    position: relative;
+    display: grid;
+    place-items: center;
+    height: 150px;
+    background: var(--sand);
+}
+
+.card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.75rem;
+}
+
+.card__icon {
+    font-size: 3.5rem;
+}
+
+.badge {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    background: var(--red);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.65rem;
+    border-radius: 6px;
+}
+
+.badge--oferta {
+    background: var(--navy);
+    color: var(--sand);
+}
+
+.badge--agotado {
+    background: #555;
+}
+
+.card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.1rem 1.25rem 1.25rem;
+    flex: 1;
+}
+
+.card__body h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+    line-height: 1.25;
+}
+
+.card__meta {
+    margin: 0;
+    font-size: 0.85rem;
+    opacity: 0.85;
+}
+
+.prices {
+    display: flex;
+    gap: 0.75rem;
+    margin: 0.75rem 0 1rem;
+    margin-top: auto;
+    padding-top: 0.75rem;
+}
+
+.price {
+    flex: 1;
+    background: #fff;
+    border-radius: 10px;
+    padding: 0.5rem 0.7rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.price span {
+    font-size: 0.7rem;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.price strong {
+    font-size: 1.1rem;
+}
+
+.price s {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+.price--socio {
+    background: var(--navy);
+    color: var(--sand);
+}
+
+.price--socio span {
+    opacity: 0.85;
+}
+
+.btn {
+    display: block;
+    text-align: center;
+    background: var(--navy);
+    color: var(--sand);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+}
+
+.btn--payment {
+    width: 100%;
+    border: 0;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: var(--navy-deep);
+}
+
+.card__soon {
+    margin: 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.empty {
+    grid-column: 1 / -1;
+    padding: 2rem;
+    text-align: center;
+}

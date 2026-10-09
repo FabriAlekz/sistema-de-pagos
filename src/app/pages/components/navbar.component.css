@@ -1,0 +1,178 @@
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #803706;
+    padding: 20px;
+    position: relative;
+}
+
+.navbar h2 {
+    color: white;
+    font-size: 24px;
+    margin: 0;
+}
+
+/* ========================= MENÚ ========================= */
+.navbar .menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .menu li {
+    list-style: none;
+}
+
+.navbar .menu li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    display: block;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .menu li a:hover {
+    color: #ffd7b5;
+    transform: translateY(-2px);
+}
+
+/* ========================= BOTONES ========================= */
+.navbar .btn_actions {
+    display: flex;
+    gap: 10px;
+}
+
+.navbar button {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn_login {
+    background-color: white;
+    color: #803706;
+}
+
+.btn_register {
+    background-color: #ffb067;
+    color: #fff;
+}
+
+/* ========================= CHECKBOX ========================= */
+.navbar input {
+    display: none;
+}
+
+/* ========================= ICONO HAMBURGUESA ========================= */
+.menu_icon {
+    display: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.menu_icon:hover {
+    color: #ffd7b5;
+}
+
+.nav-icon {
+    font-size: 32px;
+    line-height: 1;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* ========================= RESPONSIVE ========================= */
+@media (max-width: 900px) {
+    .navbar {
+        justify-content: space-between;
+        padding: 15px 20px;
+    }
+
+    /* Mostrar hamburguesa */
+    .menu_icon {
+        display: block;
+        order: 2;
+    }
+
+    /* ========================= MENÚ MOBILE ========================= */
+    .navbar .menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #803706;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 15px 0;
+        z-index: 1000;
+        /* Estado inicial */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-15px);
+        /* TRANSICIÓN */
+        transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+    }
+
+    .navbar .menu li {
+        width: 100%;
+    }
+
+    .navbar .menu li a {
+        padding: 15px;
+        text-align: center;
+        transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+
+    .navbar .menu li a:hover {
+        background-color: #692d05;
+        color: #ffd7b5;
+        transform: translateX(5px);
+    }
+
+    /* ========================= ABRIR MENÚ ========================= */
+    .navbar input:checked~.menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    /* Animación del icono */
+    .navbar input:checked+.menu_icon {
+        transform: rotate(90deg);
+    }
+
+    /* Ocultar botones en mobile */
+    .navbar .btn_actions {
+        display: none;
+    }
+}
+
+/* ========================= MÓVILES ========================= */
+@media (max-width: 600px) {
+    .navbar h2 {
+        font-size: 20px;
+    }
+
+    .navbar {
+        padding: 12px 15px;
+    }
+
+    .menu_icon {
+        font-size: 26px;
+    }
+}

@@ -1,0 +1,274 @@
+:host {
+    --navy: #012f50;
+    --navy-deep: #01243d;
+    --sand: #e8cdb0;
+    --sand-soft: #f6ebdf;
+    --red: #d4151b;
+    display: block;
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--navy);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.recetas {
+    padding: clamp(3rem, 7vw, 5rem) 0;
+    background: var(--sand-soft);
+}
+
+.wrap {
+    width: min(1120px, 100% - 2.5rem);
+    margin-inline: auto;
+}
+
+h2,
+h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0;
+}
+
+h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+}
+
+h4 {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+}
+
+:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 3px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tab {
+    border: 2px solid var(--navy);
+    background: transparent;
+    color: var(--navy);
+    font: inherit;
+    font-weight: 600;
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.tab--active {
+    background: var(--navy);
+    color: var(--sand);
+}
+
+/* Card */
+.receta {
+    background: #fff;
+    border-radius: 24px;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.receta__head {
+    margin-bottom: 2rem;
+}
+
+.chip {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.25rem 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    transform: rotate(-2deg);
+}
+
+.receta__base {
+    margin: 0.5rem 0 0;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.receta__desc {
+    margin: 0.75rem 0 0;
+    max-width: 60ch;
+}
+
+.receta__grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        'media ing'
+        'pasos pasos';
+}
+
+.media {
+    grid-area: media;
+    display: grid;
+    place-items: center;
+    min-height: 260px;
+    background: var(--sand);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.media__icon {
+    font-size: 6rem;
+}
+
+.ing {
+    grid-area: ing;
+}
+
+.ing__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.mult {
+    display: flex;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+}
+
+.mult__btn {
+    border: 2px solid var(--navy);
+    background: transparent;
+    color: var(--navy);
+    font: inherit;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.mult__btn--active {
+    background: var(--navy);
+    color: var(--sand);
+}
+
+.ing__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ing__list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed rgba(1, 47, 80, 0.3);
+}
+
+.ing__list strong {
+    font-variant-numeric: tabular-nums;
+}
+
+.ing__total {
+    border-bottom: none !important;
+    background: var(--navy);
+    color: var(--sand);
+    padding: 0.75rem 1rem !important;
+    border-radius: 12px;
+    margin-top: 0.75rem;
+    font-weight: 700;
+}
+
+.pasos {
+    grid-area: pasos;
+}
+
+.pasos ol {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style: none;
+    counter-reset: paso;
+    display: grid;
+    gap: 0.9rem;
+}
+
+.pasos li {
+    counter-increment: paso;
+    position: relative;
+    padding-left: 3rem;
+    min-height: 2.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.pasos li::before {
+    content: counter(paso);
+    position: absolute;
+    left: 0;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--sand);
+    font-weight: 700;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.btn {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--sand);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+}
+
+.btn:hover {
+    background: var(--navy-deep);
+}
+
+.btn--ghost {
+    background: transparent;
+    color: var(--navy);
+    border: 2px solid var(--navy);
+}
+
+.btn--ghost:hover {
+    background: var(--sand);
+}
+
+@media (max-width: 760px) {
+    .receta__grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: 'media' 'ing' 'pasos';
+    }
+}

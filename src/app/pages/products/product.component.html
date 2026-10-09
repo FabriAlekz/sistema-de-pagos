@@ -1,0 +1,82 @@
+<app-navbar />
+<section class="productos" id="catalogo">
+    <div class="wrap">
+        <h2>Nuestros productos</h2>
+        <p class="intro">Precios del catálogo de setiembre 2026. El precio socio aplica a clientes afiliados.</p>
+        @if (submissionNotice()) {
+        <p class="submission-notice" role="status">
+            El formulario regresó desde FormSubmit. Si es tu primera prueba, confirma el correo de activación enviado
+            por FormSubmit al destinatario para habilitar futuras notificaciones.
+        </p>
+        }
+
+        <div class="toolbar">
+            <div class="tabs" role="tablist" aria-label="Categorías">
+                @for (c of categorias; track c.id) {
+                <button type="button" role="tab" class="tab" [class.tab--active]="categoryActive() === c.id"
+                    [attr.aria-selected]="categoryActive() === c.id" (click)="seleccionar(c.id)">
+                    {{ c.label }}
+                </button>
+                }
+            </div>
+            <input class="search" type="search" placeholder="Buscar producto" aria-label="Buscar producto"
+                (input)="buscar($event)" />
+        </div>
+
+        <ul class="grid">
+            @for (p of filtrados(); track p.id) {
+            <li class="card" [class.card--agotado]="p.agotado">
+                <div class="card__media">
+                    @if (p.imagen) {
+                    <img [src]="p.imagen" [alt]="p.nombre" loading="lazy" />
+                    } @else {
+                    <span class="card__icon" aria-hidden="true">{{ icono(p.categoria) }}</span>
+                    }
+                    @if (p.nuevo) { <span class="badge badge--nuevo">Nuevo</span> }
+                    @if (p.oferta) { <span class="badge badge--oferta">Oferta</span> }
+                    @if (p.agotado) { <span class="badge badge--agotado">Agotado</span> }
+                </div>
+
+                <div class="card__body">
+                    <h3>{{ p.nombre }}</h3>
+                    <p class="card__meta">{{ p.presentacion }}</p>
+                    @if (p.duracion) {
+                    <p class="card__meta">Duración: {{ p.duracion }}</p>
+                    }
+
+                    <div class="prices">
+                        <div class="price">
+                            <span>Normal</span>
+                            @if (p.oferta) {
+                            <s>{{ precio(p.precioNormal) }}</s>
+                            <strong>{{ precio(p.oferta) }}</strong>
+                            } @else {
+                            <strong>{{ precio(p.precioNormal) }}</strong>
+                            }
+                        </div>
+                        @if (p.precioSocio) {
+                        <div class="price price--socio">
+                            <span>Socio</span>
+                            <strong>{{ precio(p.precioSocio) }}</strong>
+                        </div>
+                        }
+                    </div>
+
+                    @if (p.agotado) {
+                    <p class="card__soon">Próximamente en stock</p>
+                    } @else {
+                    <button class="btn btn--payment" type="button" (click)="abrirPago(p)">Simular compra</button>
+                    <a class="btn" [href]="linkWhatsapp(p)" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+                    }
+                </div>
+            </li>
+            } @empty {
+            <li class="empty">No encontramos productos con ese filtro.</li>
+            }
+        </ul>
+    </div>
+</section>
+
+@if (productoParaPagar(); as producto) {
+<app-modal-payment [product]="producto" (closed)="cerrarPago()" />
+}

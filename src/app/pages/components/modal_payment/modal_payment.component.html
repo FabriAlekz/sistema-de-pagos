@@ -1,0 +1,59 @@
+<div class="payment-backdrop" (click)="closeOnBackdrop($event)">
+    <section class="payment-modal" role="dialog" aria-modal="true" aria-labelledby="payment-title">
+        <button class="payment-close" type="button" aria-label="Cerrar" (click)="close()">×</button>
+
+        <h2 id="payment-title">Simular compra</h2>
+        <p class="payment-note">El producto y sus precios se completan desde tu selección. El navegador puede autocompletar tu nombre y correo. Esta es solo una simulación; no se realizan pagos ni compras.</p>
+
+        <div class="payment-product">
+            <div>
+                <strong>{{ product.nombre }}</strong>
+                <span>{{ product.presentacion }}</span>
+            </div>
+            <span>{{ quantity() }} × S/. {{ unitPrice() | number:'1.2-2' }}</span>
+        </div>
+
+        <form action="https://formsubmit.co/fabrizioquispe1900@gmail.com" method="POST" autocomplete="on"
+            (submit)="prepareFormSubmit($event)">
+            <input type="hidden" name="_subject" [value]="'Simulación de producto: ' + product.nombre" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_next" value="" />
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="display: none" />
+            <input type="hidden" name="Producto" [value]="product.nombre" />
+            <input type="hidden" name="Presentación" [value]="product.presentacion" />
+            <input type="hidden" name="Cantidad de interés" [value]="quantity()" />
+            <input type="hidden" name="Precio unitario referencial" [value]="'S/. ' + unitPrice().toFixed(2)" />
+            <input type="hidden" name="Total referencial" [value]="'S/. ' + total().toFixed(2)" />
+            <label>
+                Nombre
+                <input name="name" type="text" autocomplete="name" maxlength="100" required />
+            </label>
+            <label>
+                Tu correo
+                <input name="email" type="email" autocomplete="email" maxlength="254" required />
+            </label>
+            <div class="payment-fields">
+                <label>
+                    Cantidad
+                    <input name="Cantidad" type="number" min="1" max="99" [value]="quantity()" required
+                        (input)="updateQuantity($event)" />
+                </label>
+                <label>
+                    Medio de pago simulado
+                    <select name="Medio de pago indicado" required>
+                        <option value="yape">Yape</option>
+                        <option value="plin">Plin</option>
+                        <option value="transferencia">Transferencia</option>
+                    </select>
+                </label>
+            </div>
+
+            <p class="payment-total">
+                <span>Total de prueba</span>
+                <strong>S/. {{ total() | number:'1.2-2' }}</strong>
+            </p>
+
+            <button class="payment-button" type="submit">Enviar datos por correo</button>
+        </form>
+    </section>
+</div>

@@ -1,0 +1,82 @@
+<app-navbar />
+<section class="recetas" id="recetas">
+    <div class="wrap">
+        <h2>Recetas</h2>
+
+        @if (recetas.length > 1) {
+        <div class="tabs" role="tablist" aria-label="Recetas">
+            @for (r of recetas; track r.id; let i = $index) {
+            <button type="button" role="tab" class="tab" [class.tab--active]="seleccion() === i"
+                [attr.aria-selected]="seleccion() === i" (click)="elegir(i)">
+                {{ r.titulo }}
+            </button>
+            }
+        </div>
+        }
+
+        <article class="receta">
+            <header class="receta__head">
+                <span class="chip">Receta del mes</span>
+                <h3>{{ receta().titulo }}</h3>
+                <p class="receta__base">con nuestra {{ receta().base }}</p>
+                @if (receta().descripcion) {
+                <p class="receta__desc">{{ receta().descripcion }}</p>
+                }
+            </header>
+
+            <div class="receta__grid">
+                <div class="media">
+                    @if (receta().imagen) {
+                    <img [src]="receta().imagen" [alt]="receta().titulo" loading="lazy" />
+                    } @else {
+                    <span class="media__icon" aria-hidden="true">🍨</span>
+                    }
+                </div>
+
+                <div class="ing">
+                    <div class="ing__top">
+                        <h4>Ingredientes</h4>
+                        <div class="mult" role="group" aria-label="Cantidad de preparaciones">
+                            @for (m of multiplicadores; track m) {
+                            <button type="button" class="mult__btn" [class.mult__btn--active]="multiplicador() === m"
+                                [attr.aria-pressed]="multiplicador() === m" (click)="escalar(m)">
+                                x{{ m }}
+                            </button>
+                            }
+                        </div>
+                    </div>
+
+                    <ul class="ing__list">
+                        @for (i of ingredients(); track i.nombre) {
+                        <li>
+                            <span>{{ i.nombre }}</span>
+                            <strong>{{ formato(i.gramos) }}</strong>
+                        </li>
+                        }
+                        <li class="ing__total">
+                            <span>Total de la mezcla</span>
+                            <strong>{{ formato(totalGramos()) }}</strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="pasos">
+                    <h4>Instrucciones</h4>
+                    <ol>
+                        @for (p of receta().pasos; track $index) {
+                        <li>{{ p }}</li>
+                        }
+                    </ol>
+
+                    <div class="actions">
+                        @if (receta().videoUrl) {
+                        <a class="btn btn--ghost" [href]="receta().videoUrl" target="_blank" rel="noopener">Ver video de
+                            la receta</a>
+                        }
+                        <a class="btn" [href]="linkWhatsapp()" target="_blank" rel="noopener">Pedir los insumos</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>

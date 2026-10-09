@@ -4,13 +4,25 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## Development server
 
-To start a local development server, run:
+Start the Angular development server:
 
 ```bash
-ng serve
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Product form email simulation
+
+The form posts directly from the browser to FormSubmit at `https://formsubmit.co/fabrizioquispe1900@gmail.com`; it does not use an app API or backend. FormSubmit is an external service and receives the submitted fields to deliver the email. The form is only a simulation: it does not process payments, purchases, reservations, or registrations and does not write to a database.
+
+On the first submission, FormSubmit may send an activation email to the recipient. Confirm that message to enable email delivery. After submission, FormSubmit redirects back to the product catalog.
+
+Start the Angular development server:
+
+```bash
+npm start
+```
+
+Open `http://localhost:4200/productos` and choose **Simular compra**.
 
 ## Code scaffolding
 
